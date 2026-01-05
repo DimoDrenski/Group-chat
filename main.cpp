@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <limits>
 
 #include "User.h"
 #include "Message.h"
@@ -20,6 +21,17 @@ int main() {
         std::cout << "Choice: ";
         std::cin >> choice;
         std::cin.ignore(); // clear the newline from input buffer
+
+        int choice;
+        std::cin >> choice; // Loop prevention attempt
+
+        // Input validation shield
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter a number.\n";
+            continue;
+        }
 
         if (choice == 1) {
             User user;
@@ -77,3 +89,4 @@ int main() {
 
     return 0;
 }
+
